@@ -1,20 +1,27 @@
-
-# Importing python libraries
-
-
-import os
-import glob
 import pandas as pd
-import ntpath
-
 import urllib.parse
+import configparser
+
+config = configparser.ConfigParser()
+
+config.read(r'C:/Users/Siva Doddapaneni/Downloads/mecca-coding-task/mecca-coding-task/config/code_config.ini')
+
+inputpath=config.get('paths','input')
+
+server=config.get('server','Server')
+
+database=config.get('database','Database')
+
+uid=config.get('credentials','userid')
+password=config.get('credentials','password')
+
 #Connecting AZURE SQL Server
 params = urllib.parse.quote_plus(
     'Driver=%s;' % '{ODBC Driver 17 for SQL Server}' +
-    'Server=%s,1433;' % 'code-dev.database.windows.net' +
-    'Database=%s;' % 'code_dev' +
-    'Uid=%s;' % 'code_dev'  +
-    'Pwd={%s};' % 'Shiva9999!' +
+    'Server=%s,1433;' % server+
+    'Database=%s;' % database +
+    'Uid=%s;' % uid  +
+    'Pwd={%s};' % password +
     'Encrypt=no;' +
     'TrustServerCertificate=no;'
     )
